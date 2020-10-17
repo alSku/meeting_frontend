@@ -15,6 +15,7 @@ import { DashboardComponent } from './routes/dashboard/dashboard.component';
 
 import { HttpErrorHandler } from './http-error-handling.service';
 import { MeetingsService } from './services/meetings.service';
+import { BbbComponent } from './components/bbb/bbb.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MeetingsService } from './services/meetings.service';
     AdministrationComponent,
     MeetingsComponent,
     NotfoundComponent,
-    DashboardComponent
+    DashboardComponent,
+    BbbComponent
   ],
   imports: [
     BrowserModule,
