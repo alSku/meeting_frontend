@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
+import { NgModule, Pipe, PipeTransform, SecurityContext } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,18 @@ import { DashboardComponent } from './routes/dashboard/dashboard.component';
 
 import { HttpErrorHandler } from './http-error-handling.service';
 import { MeetingsService } from './services/meetings.service';
+import { BbbComponent } from './components/bbb/bbb.component';
+
+import { CommonModule } from '@angular/common';
+
+@Pipe({ name: 'safe' })
+export class SafePipe implements PipeTransform {
+  constructor(private sanitizer: DomSanitizer) {}
+  transform(url) {
+    return this.sanitizer.sanitize(SecurityContext.URL, url);
+    // return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+} 
 
 @NgModule({
   declarations: [
@@ -24,14 +36,17 @@ import { MeetingsService } from './services/meetings.service';
     AdministrationComponent,
     MeetingsComponent,
     NotfoundComponent,
-    DashboardComponent
+    DashboardComponent,
+    BbbComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatButtonModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
   providers: [HttpErrorHandler, MeetingsService],
   bootstrap: [AppComponent]

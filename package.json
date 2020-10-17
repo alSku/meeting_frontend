@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev": "ng build --baseHref /bbb/client/ --deployUrl /bbb/client/ --watch true --outputPath ../javascript_seminar_meeting/public",
+    "dev": "ng build --baseHref /bbb/client/ --deployUrl /bbb/client/ --watch true --outputPath ../public",
     "fix-plugin": "ngcc"
   },
   "private": true,

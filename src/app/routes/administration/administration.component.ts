@@ -6,6 +6,7 @@ import {MeetingConfiguration, MeetingRoomInfo, MeetingsService} from '../../serv
   templateUrl: './administration.component.html',
   styleUrls: ['./administration.component.sass']
 })
+
 export class AdministrationComponent implements OnInit {
 
   constructor(private meetingService: MeetingsService) {
@@ -18,6 +19,13 @@ export class AdministrationComponent implements OnInit {
   meetingEndUrl: string;
 
   ngOnInit(): void {
+
+    this.meetingConfiguration = null;
+    this.meetingRoomInfo = null;
+
+    this.attendeeUrl = null;
+    this.moderatorUrl = null;
+    this.meetingEndUrl = null;
 
     this.meetingConfiguration = new MeetingConfiguration(
       'TestRoom',

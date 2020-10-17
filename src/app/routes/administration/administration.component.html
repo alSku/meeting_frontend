@@ -6,4 +6,9 @@
   <a href="{{moderatorUrl}}">Moderator Url</a><br>
   <a href="{{meetingEndUrl}}">Meeting End Url</a><br>
   <pre><code>{{meetingRoomInfo | json}}</code></pre>
+  <div>
+    <ng-template [ngIf]="moderatorUrl !== null">
+      <iframe [src]='moderatorUrl | safe' width="50%" height="300" style="border:1px solid black;"></iframe>
+      </ng-template>
+  </div>
 </div>
