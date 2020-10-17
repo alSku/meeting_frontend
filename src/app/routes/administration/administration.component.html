@@ -6,9 +6,10 @@
   <a href="{{moderatorUrl}}">Moderator Url</a><br>
   <a href="{{meetingEndUrl}}">Meeting End Url</a><br>
   <pre><code>{{meetingRoomInfo | json}}</code></pre>
+  
   <div>
-    <ng-template [ngIf]="moderatorUrl !== null">
-      <iframe [src]='moderatorUrl | safe' width="50%" height="300" style="border:1px solid black;"></iframe>
+    <ng-template [ngIf]="moderatorUrl">
+      <iframe allow="geolocation microphone camera midi encrypted-media vr" [src]=moderatorUrl width="50%" height="300" style="border:1px solid black;"></iframe>
       </ng-template>
   </div>
 </div>

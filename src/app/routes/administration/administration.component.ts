@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {MeetingConfiguration, MeetingRoomInfo, MeetingsService} from '../../services/meetings.service';
+import { Component, OnInit, SecurityContext } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { MeetingConfiguration, MeetingRoomInfo, MeetingsService } from '../../services/meetings.service';
 
 @Component({
   selector: 'app-administration',
@@ -9,14 +10,14 @@ import {MeetingConfiguration, MeetingRoomInfo, MeetingsService} from '../../serv
 
 export class AdministrationComponent implements OnInit {
 
-  constructor(private meetingService: MeetingsService) {
+  constructor(private meetingService: MeetingsService, private sanitizer: DomSanitizer) {
   }
 
   meetingConfiguration: MeetingConfiguration;
   meetingRoomInfo: MeetingRoomInfo;
-  moderatorUrl: string;
-  attendeeUrl: string;
-  meetingEndUrl: string;
+  moderatorUrl: SafeResourceUrl;
+  attendeeUrl: SafeResourceUrl;
+  meetingEndUrl: SafeResourceUrl;
 
   ngOnInit(): void {
 
@@ -44,7 +45,8 @@ export class AdministrationComponent implements OnInit {
       this.meetingRoomInfo = meetingRoomInfo;
 
       if (this.meetingRoomInfo.moderatorUrl) {
-        this.moderatorUrl = this.meetingRoomInfo.moderatorUrl;
+        let test = this.sanitizer.sanitize(SecurityContext.URL, this.meetingRoomInfo.moderatorUrl);
+        this.moderatorUrl = this.sanitizer.bypassSecurityTrustResourceUrl(test);
       }
       if (this.meetingRoomInfo.attendeeUrl) {
         this.attendeeUrl = this.meetingRoomInfo.attendeeUrl;
